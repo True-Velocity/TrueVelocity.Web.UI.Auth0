@@ -208,6 +208,7 @@
 
   /* Global base styles not directly tied to Tailwind utility names */
   font-family:
+    ULP Custom,
     ui-sans-serif,
     system-ui,
     -apple-system,

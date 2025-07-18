@@ -14,9 +14,9 @@ const formFieldVariants = cva(
           "text-destructive-foreground shadow-input-destructive-resting hover:shadow-input-destructive-hover focus-within:ring-destructive-border/15 focus-within:ring-4",
       },
       size: {
-        default: "h-14 rounded-2xl",
-        sm: "h-12 rounded-2xl",
-        lg: "h-16 rounded-2xl",
+        default: "h-14",
+        sm: "h-12",
+        lg: "h-16",
       },
     },
     defaultVariants: {
@@ -111,11 +111,11 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
           <div className="relative flex-1">
             <FieldPrimitive.Control
               className={cn(
-                "h-14 w-full flex-1 rounded-2xl bg-transparent px-3 pt-6 pb-1 outline-none file:border-0 file:bg-transparent file:text-sm file:font-medium",
+                "h-14 w-full flex-1 bg-transparent px-3 pt-6 pb-1 outline-none file:border-0 file:bg-transparent file:text-sm file:font-medium",
                 isDisabled &&
                   "bg-input-muted text-input-foreground cursor-not-allowed opacity-50",
-                startAdornment ? "rounded-l-none pl-0" : "pl-3",
-                endAdornment ? "rounded-r-none pr-0" : "pr-3",
+                startAdornment ? "pl-0" : "pl-3",
+                endAdornment ? "pr-0" : "pr-3",
                 size === "sm" && "h-12 pb-2 text-sm",
                 size === "lg" && "h-16 pt-4 pb-0 text-base",
               )}

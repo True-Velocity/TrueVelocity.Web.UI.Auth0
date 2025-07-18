@@ -1,29 +1,29 @@
 import { render, screen, fireEvent, act } from "@testing-library/react";
-import LoginIdScreen from "../index";
-import LoginIdInstance from "@auth0/auth0-acul-js/login-id";
+import SignupIdScreen from "../index";
+import LoginIdInstance from "@auth0/auth0-acul-js/signup-id";
 import {
   ScreenTestUtils,
   MockConfigUtils,
 } from "@/test/utils/screen-test-utils";
 import { CommonTestData } from "@/test/fixtures/common-data";
-import type { MockLoginIdInstance } from "@/__mocks__/@auth0/auth0-acul-js/login-id";
-import { createMockLoginIdInstance } from "@/__mocks__/@auth0/auth0-acul-js/login-id";
+import type { MockLoginIdInstance } from "@/__mocks__/@auth0/auth0-acul-js/signup-id";
+import { createMockSignupIdInstance } from "@/__mocks__/@auth0/auth0-acul-js/signup-id";
 
 // Mock the Auth0 SDK
 const MockedLoginIdInstance = LoginIdInstance as unknown as jest.Mock;
 
-describe("LoginIdScreen", () => {
+describe("SignupIdScreen", () => {
   let mockInstance: MockLoginIdInstance;
 
   beforeEach(() => {
     MockedLoginIdInstance.mockClear();
-    mockInstance = createMockLoginIdInstance();
+    mockInstance = createMockSignupIdInstance();
     MockedLoginIdInstance.mockImplementation(() => mockInstance); // new LoginIdInstance() is replaced with the mockInstance object
   });
 
   describe("Core Rendering & Functionality", () => {
     beforeEach(() => {
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
     });
 
     it("should render the login screen with default content", () => {
@@ -56,24 +56,24 @@ describe("LoginIdScreen", () => {
 
   describe("Sign-up & Forgot Password Links", () => {
     it("should render forgot password link when available", () => {
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
       expect(screen.getByText("Can't log in?")).toBeInTheDocument();
     });
 
     it("should HIDE the forgot password link when isForgotPasswordEnabled is false", () => {
       mockInstance.transaction.isForgotPasswordEnabled = false;
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
       expect(screen.queryByText("Can't log in?")).not.toBeInTheDocument();
     });
 
     it("should render signup link when available", () => {
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
       expect(screen.getByText("Sign up")).toBeInTheDocument();
     });
 
     it("should HIDE the signup link when isSignupEnabled is false", () => {
       mockInstance.transaction.isSignupEnabled = false;
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
       expect(screen.queryByText("Sign up")).not.toBeInTheDocument();
     });
   });
@@ -84,7 +84,7 @@ describe("LoginIdScreen", () => {
         MockConfigUtils.configureTransaction(mockInstance, {
           allowedIdentifiers: CommonTestData.identifierTypes.emailOnly,
         });
-        render(<LoginIdScreen />);
+        render(<SignupIdScreen />);
       });
 
       it("should show email-only input", () => {
@@ -97,7 +97,7 @@ describe("LoginIdScreen", () => {
         MockConfigUtils.configureTransaction(mockInstance, {
           allowedIdentifiers: CommonTestData.identifierTypes.usernameOnly,
         });
-        render(<LoginIdScreen />);
+        render(<SignupIdScreen />);
       });
 
       it("should show username-only input", () => {
@@ -110,7 +110,7 @@ describe("LoginIdScreen", () => {
         MockConfigUtils.configureTransaction(mockInstance, {
           allowedIdentifiers: CommonTestData.identifierTypes.phoneOnly,
         });
-        render(<LoginIdScreen />);
+        render(<SignupIdScreen />);
       });
 
       it("should show phone-only input", () => {
@@ -125,7 +125,7 @@ describe("LoginIdScreen", () => {
         MockConfigUtils.configureErrors(mockInstance, [
           CommonTestData.errors.general,
         ]);
-        render(<LoginIdScreen />);
+        render(<SignupIdScreen />);
       });
 
       it("should display the general error message", () => {
@@ -138,7 +138,7 @@ describe("LoginIdScreen", () => {
         MockConfigUtils.configureErrors(mockInstance, [
           CommonTestData.errors.fieldSpecific,
         ]);
-        render(<LoginIdScreen />);
+        render(<SignupIdScreen />);
       });
 
       it("should display the field-specific error message", () => {
@@ -152,7 +152,7 @@ describe("LoginIdScreen", () => {
           CommonTestData.errors.general,
           CommonTestData.errors.fieldSpecific,
         ]);
-        render(<LoginIdScreen />);
+        render(<SignupIdScreen />);
       });
 
       it("should display all error messages", () => {
@@ -166,7 +166,7 @@ describe("LoginIdScreen", () => {
     it("should SHOW the captcha when isCaptchaAvailable is true", () => {
       mockInstance.screen.isCaptchaAvailable = true;
       mockInstance.screen.captchaImage = "data:image/png;base64,mockimage";
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
       expect(screen.getByAltText("CAPTCHA challenge")).toBeInTheDocument();
       expect(
         screen.getByRole("textbox", { name: /enter the code shown above/i }),
@@ -175,7 +175,7 @@ describe("LoginIdScreen", () => {
 
     it("should HIDE the captcha when isCaptchaAvailable is false", () => {
       mockInstance.screen.isCaptchaAvailable = false;
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
       expect(
         screen.queryByAltText("CAPTCHA challenge"),
       ).not.toBeInTheDocument();
@@ -184,7 +184,7 @@ describe("LoginIdScreen", () => {
     it("should not show the CAPTCHA when the captcha image is an empty string", () => {
       mockInstance.screen.isCaptchaAvailable = true; // Still "available"
       mockInstance.screen.captchaImage = ""; // But the component should handle empty image
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
       expect(
         screen.queryByAltText("CAPTCHA challenge"),
       ).not.toBeInTheDocument();
@@ -193,7 +193,7 @@ describe("LoginIdScreen", () => {
     it("should include the captcha value in the submission", async () => {
       mockInstance.screen.isCaptchaAvailable = true;
       mockInstance.screen.captchaImage = "data:image/png;base64,mockimage";
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
       await ScreenTestUtils.fillInput(
         /username|email|phone/i,
         "test@example.com",
@@ -213,7 +213,7 @@ describe("LoginIdScreen", () => {
       MockConfigUtils.configureTransaction(mockInstance, {
         alternateConnections: CommonTestData.socialConnections,
       });
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
       expect(
         screen.getByRole("button", { name: /continue with google/i }),
       ).toBeInTheDocument();
@@ -229,7 +229,7 @@ describe("LoginIdScreen", () => {
       MockConfigUtils.configureTransaction(mockInstance, {
         alternateConnections: [CommonTestData.socialConnections[0]],
       });
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
       await ScreenTestUtils.clickButton(/continue with google/i);
 
       expect(mockInstance.federatedLogin).toHaveBeenCalledWith({
@@ -242,7 +242,7 @@ describe("LoginIdScreen", () => {
     it("should SHOW the passkey button when isPasskeyEnabled is true", () => {
       mockInstance.transaction.isPasskeyEnabled = true;
       mockInstance.screen.publicKey = { challenge: "mock-challenge" };
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
       expect(
         screen.getByRole("button", { name: /continue with a passkey/i }),
       ).toBeInTheDocument();
@@ -250,7 +250,7 @@ describe("LoginIdScreen", () => {
 
     it("should HIDE the passkey button when isPasskeyEnabled is false", () => {
       mockInstance.transaction.isPasskeyEnabled = false;
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
       expect(
         screen.queryByRole("button", { name: /continue with a passkey/i }),
       ).not.toBeInTheDocument();
@@ -259,7 +259,7 @@ describe("LoginIdScreen", () => {
     it("should call the passkeyLogin method when the button is clicked", async () => {
       mockInstance.transaction.isPasskeyEnabled = true;
       mockInstance.screen.publicKey = { challenge: "mock-challenge" };
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
       await ScreenTestUtils.clickButton(/continue with a passkey/i);
       expect(mockInstance.passkeyLogin).toHaveBeenCalled();
     });
@@ -270,20 +270,20 @@ describe("LoginIdScreen", () => {
       MockConfigUtils.configureTransaction(mockInstance, {
         alternateConnections: CommonTestData.socialConnections,
       });
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
       expect(screen.getByText("Or")).toBeInTheDocument();
     });
 
     it("should show the separator when passkey is available", () => {
       mockInstance.transaction.isPasskeyEnabled = true;
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
       expect(screen.getByText("Or")).toBeInTheDocument();
     });
 
     it("should HIDE the separator when no alternative logins are available", () => {
       mockInstance.transaction.isPasskeyEnabled = false;
       mockInstance.transaction.alternateConnections = [];
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
       expect(screen.queryByText("Or")).not.toBeInTheDocument();
     });
   });
@@ -300,7 +300,7 @@ describe("LoginIdScreen", () => {
       // Enable CAPTCHA
       mockInstance.screen.isCaptchaAvailable = true;
       mockInstance.screen.captchaImage = "data:image/png;base64,mockimage";
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
 
       // Primary form
       expect(screen.getByText("Mock Welcome Title")).toBeInTheDocument();
@@ -325,7 +325,7 @@ describe("LoginIdScreen", () => {
       // Enable CAPTCHA
       mockInstance.screen.isCaptchaAvailable = true;
       mockInstance.screen.captchaImage = "data:image/png;base64,mockimage";
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
 
       await ScreenTestUtils.fillInput(
         /username|email|phone/i,
@@ -346,7 +346,7 @@ describe("LoginIdScreen", () => {
       MockConfigUtils.configureTexts(mockInstance, {
         pageTitle: "Custom Login Title",
       });
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
       expect(document.title).toBe("Custom Login Title");
     });
   });
@@ -354,7 +354,7 @@ describe("LoginIdScreen", () => {
   describe("Country Code Picker Conditional Display", () => {
     it("should NOT show country picker when phone is mixed with other identifiers", () => {
       mockInstance.transaction.allowedIdentifiers = ["email", "phone"];
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
 
       // Should not show country picker when phone is mixed with email
       expect(screen.queryByText("Select Country")).not.toBeInTheDocument();
@@ -362,7 +362,7 @@ describe("LoginIdScreen", () => {
 
     it("should NOT show country picker when username and phone are both allowed", () => {
       mockInstance.transaction.allowedIdentifiers = ["username", "phone"];
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
 
       // Should not show country picker when phone is mixed with username
       expect(screen.queryByText("Select Country")).not.toBeInTheDocument();
@@ -372,7 +372,7 @@ describe("LoginIdScreen", () => {
       mockInstance.transaction.allowedIdentifiers = ["phone"];
       mockInstance.transaction.countryCode = null;
       mockInstance.transaction.countryPrefix = null;
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
 
       expect(screen.getByText("Select Country")).toBeInTheDocument();
     });
@@ -381,7 +381,7 @@ describe("LoginIdScreen", () => {
       mockInstance.transaction.allowedIdentifiers = ["phone"];
       mockInstance.transaction.countryCode = null;
       mockInstance.transaction.countryPrefix = null;
-      render(<LoginIdScreen />);
+      render(<SignupIdScreen />);
 
       const countryPicker = screen
         .getByText("Select Country")

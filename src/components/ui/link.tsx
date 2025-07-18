@@ -28,19 +28,16 @@ export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
     VariantProps<typeof linkVariants> {}
 
-function Link(
-  { className, children, variant, underline, ...props }: LinkProps,
-  ref: React.Ref<HTMLAnchorElement> | undefined,
-) {
-  return (
-    <a
-      ref={ref}
-      className={cn(linkVariants({ variant, underline }), className)}
-      {...props}
-    >
-      {children}
-    </a>
-  );
-}
+const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
+  ({ className, variant, underline, ...props }, ref) => {
+    return (
+      <a
+        ref={ref}
+        className={cn(linkVariants({ variant, underline }), className)}
+        {...props}
+      />
+    );
+  },
+);
 
 export { Link };

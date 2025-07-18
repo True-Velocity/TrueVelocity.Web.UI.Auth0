@@ -33,7 +33,7 @@ export interface MockLoginIdInstance {
  * This ensures each test gets a clean, isolated mock object that is
  * structurally aligned with the official SDK documentation.
  */
-export const createMockLoginIdInstance = (): MockLoginIdInstance => ({
+export const createMockSignupIdInstance = (): MockLoginIdInstance => ({
   login: jest.fn(),
   federatedLogin: jest.fn(),
   passkeyLogin: jest.fn(),
@@ -87,4 +87,4 @@ export const createMockLoginIdInstance = (): MockLoginIdInstance => ({
   },
 });
 
-export default jest.fn().mockImplementation(() => createMockLoginIdInstance());
+export default jest.fn().mockImplementation(() => createMockSignupIdInstance());

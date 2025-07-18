@@ -45,7 +45,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     ref,
   ) => {
     const baseStyles = [
-      "block w-full border rounded transition-all duration-200",
+      "block w-full border transition-all duration-200",
       "focus:outline-none focus:ring-1 peer box-border",
       "overflow-hidden text-ellipsis whitespace-nowrap",
       "disabled:opacity-50 disabled:cursor-not-allowed",
@@ -58,7 +58,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     };
 
     const variantStyles = {
-      default: "border-gray-mid focus:border-link focus:ring-link",
+      default: "border-[#E5E7EB] focus:border-link focus:ring-link",
       error:
         "border-error ring-1 ring-error focus:border-error focus:ring-error",
       success: "border-success focus:border-success focus:ring-success",

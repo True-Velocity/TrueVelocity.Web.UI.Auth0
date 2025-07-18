@@ -7,7 +7,7 @@
     "usage": "allow"
   },
   "prompt": {
-    "name": "login-id"
+    "name": "signup-id"
   },
   "screen": {
     "captcha": {
@@ -22,44 +22,69 @@
       }
     },
     "links": {
-      "reset_password": "/u/login/password-reset-start/Username-Password-Authentication?state=mockedStateForPreservedTextsReset_cl_mock_preservedTexts_vbn789_txId_poi098",
-      "signup": "/u/signup/identifier?state=mockedStateForPreservedTextsSignup_cl_mock_preservedTexts_vbn789_txId_lkj321"
+      "login": "/u/login/identifier?state=mockedStateForPreservedTextsSignup_cl_mock_preservedTexts_vbn789_txId_lkj321"
     },
-    "name": "login-id",
+    "name": "signup-id",
     "texts": {
-      "pageTitle": "Log in | Acul react",
-      "title": "Welcome",
-      "description": "Log in to dev-tenant to continue to my acul react.",
+      "pageTitle": "Sign up | ${clientName}",
+      "title": "Create Your Account",
+      "description": "Sign Up to ${companyName} to continue to ${clientName}.",
       "separatorText": "Or",
       "buttonText": "Continue",
-      "footerLinkText": "Sign up",
-      "forgotPasswordText": "Can't log in to your account?",
-      "signupActionLinkText": "Sign up",
-      "footerText": "Don't have an account?",
-      "signupActionText": "Don't have an account?",
-      "passwordPlaceholder": "Password",
-      "usernamePlaceholder": "Username or email address",
-      "emailPlaceholder": "Email address",
       "phonePlaceholder": "Phone number",
-      "usernameOnlyPlaceholder": "Username",
-      "phoneOrUsernameOrEmailPlaceholder": "Phone or Username or Email",
-      "phoneOrEmailPlaceholder": "Phone number or Email address",
-      "phoneOrUsernamePlaceholder": "Phone Number or Username",
-      "usernameOrEmailPlaceholder": "Username or Email address",
-      "editEmailText": "Edit",
-      "alertListTitle": "Alerts",
-      "devKeysAlertTitle": "Dev Keys",
-      "devKeysAlertMessage": "One or more of your connections are currently using Auth0 development keys and should not be used in production.",
-      "devKeysAlertUrl": "https://auth0.com/docs/connections/social/devkeys",
-      "devKeysAlertLinkText": "Learn More",
-      "logoAltText": "dev-tenant",
-      "passkeyButtonText": "Continue with a passkey",
-      "badgeUrl": "https://auth0.com/?utm_source=lock&utm_campaign=badge&utm_medium=widget",
-      "badgeAltText": "Link to the Auth0 website",
-      "error": "Error",
+      "emailPlaceholder": "Email address",
+      "federatedConnectionButtonText": "Continue with ${connectionName}",
+      "footerLinkText": "Log in",
+      "loginActionLinkText": "${footerLinkText}",
+      "footerText": "Already have an account?",
+      "loginActionText": "${footerText}",
+      "passwordPlaceholder": "Password",
+      "passwordSecurityText": "Your password must contain:",
+      "usernamePlaceholder": "Username",
+      "emailOptionalPlaceholder": "Email address (Optional)",
+      "usernameOptionalPlaceholder": "Username (Optional)",
+      "phoneOptionalPlaceholder": "Phone number (Optional)",
+      "invitationTitle": "Accept your invitation to sign up | ${clientName}",
+      "invitationDescription": "Sign Up to accept ${inviterName}'s invitation to join ${companyName} on ${clientName}.",
       "captchaCodePlaceholder": "Enter the code shown above",
-      "qrCode": "QR Code",
-      "spinner_push_notification_label": "Waiting for push notification to be accepted"
+      "logoAltText": "${companyName}",
+      "email-in-use": "The user already exists.",
+      "invalid-email-format": "Email is not valid.",
+      "password-too-weak": "The password is too weak",
+      "password-policy-not-conformant": "The password is too weak",
+      "password-too-common": "The password is too common",
+      "password-previously-used": "Password has previously been used",
+      "password-mismatch": "Passwords don't match",
+      "invalid-username": "Username can only contain alphanumeric characters or: '${characters}'. Username should have between ${min} and ${max} characters.",
+      "invalid-username-max-length": "The username must not be longer than ${max} characters.",
+      "invalid-username-min-length": "The username must have at least ${min} characters.",
+      "invalid-username-invalid-length": "The username must have between ${min} and ${max} characters.",
+      "invalid-username-invalid-characters": "The username has invalid characters.",
+      "invalid-username-email-not-allowed": "Please enter a valid username. Email addresses cannot be used as usernames.",
+      "invalid-username-phone-not-allowed": "Please enter a valid username. Phone numbers cannot be used as usernames.",
+      "username-taken": "The username provided is in use already.",
+      "custom-script-error-code": "Something went wrong, please try again later.",
+      "auth0-users-validation": "Something went wrong, please try again later",
+      "invalid-connection": "Invalid connection",
+      "ip-blocked": "We have detected suspicious login behavior and further attempts will be blocked. Please contact the administrator.",
+      "ip-signup-blocked": "Too many signups from the same IP",
+      "no-db-connection": "Invalid connection",
+      "no-hrd-connection": "Email does not match any enterprise directory",
+      "no-email": "Please enter an email address",
+      "no-password": "Password is required",
+      "no-password-reset": "Enter a new password.",
+      "no-re-enter-password": "New password confirmation is missing",
+      "no-username": "Username is required",
+      "captcha-validation-failure": "We are sorry, something went wrong while validating the captcha response. Please try again.",
+      "invalid-recaptcha": "Select the checkbox to verify you are not a robot.",
+      "invalid-captcha": "Solve the challenge question to verify you are not a robot.",
+      "captcha-client-failure": "We couldn’t load the security challenge. Please try again. (Error code: #{errorCode})",
+      "no-identifier": "At least one identifier is required",
+      "invalid-phone-number": "Enter a valid phone number",
+      "invalid-email-phone": "Enter a valid email address or phone number. Phone numbers must include the country code.",
+      "invalid-email-username": "Enter a valid email address or username",
+      "invalid-phone-username": "Enter a valid phone number or username. Phone numbers must include the country code.",
+      "invalid-email-phone-username": "Enter a valid email address, phone number or username. Phone numbers must include the country code."
     }
   },
   "tenant": {
@@ -71,8 +96,8 @@
   },
   "transaction": {
     "country_code": {
-      "code": "IN",
-      "prefix": "91"
+      "code": "US",
+      "prefix": "1"
     },
     "alternate_connections": [
       {
@@ -137,88 +162,107 @@
       }
     },
     "locale": "en",
-    "state": "mockedStateForPreservedTextsLoginId_cl_mock_preservedTexts_vbn789_andOriginalClientNameAndTenantName_txId_mnb654"
+    "state": "mockedStateForPreservedTextsSignupId_cl_mock_preservedTexts_vbn789_andOriginalClientNameAndTenantName_txId_mnb654"
   },
   "branding": {
     "settings": {
       "colors": {
         "page_background": "#000000",
-        "primary": "#635dff"
+        "primary": "#Da291c"
       }
     },
     "themes": {
       "default": {
         "borders": {
-          "buttons_style": "rounded",
-          "inputs_style": "rounded",
+          "button_border_radius": 1,
           "button_border_weight": 1,
-          "button_border_radius": 3,
+          "buttons_style": "sharp",
+          "input_border_radius": 1,
           "input_border_weight": 1,
-          "input_border_radius": 3,
-          "widget_corner_radius": 5,
+          "inputs_style": "sharp",
+          "show_widget_shadow": true,
           "widget_border_weight": 0,
-          "show_widget_shadow": true
+          "widget_corner_radius": 0
         },
+
         "colors": {
-          "primary_button": "#635dff",
-          "primary_button_label": "#ffffff",
-          "secondary_button_border": "#c9cace",
-          "secondary_button_label": "#1e212a",
-          "base_focus_color": "#635dff",
+          "body_text": "#000000",
+          "header": "#000000",
+          "error": "#FF1C00",
+
+          "base_focus_color": "#000000",
           "base_hover_color": "#000000",
-          "links_focused_components": "#635dff",
-          "header": "#1e212a",
-          "body_text": "#1e212a",
-          "widget_background": "#ffffff",
-          "widget_border": "#c9cace",
-          "input_labels_placeholders": "#65676e",
+
+          "primary_button": "#E12727",
+          "primary_button_label": "#F7F7F7",
+
+          "secondary_button_border": "#333333",
+          "secondary_button_label": "#000000",
+
+          "icons": "#000000",
+
+          "input_border": "#E5E7EB",
+          "input_background": "#FFFFFF",
           "input_filled_text": "#000000",
-          "input_border": "#c9cace",
-          "input_background": "#ffffff",
-          "icons": "#65676e",
-          "error": "#d03c38",
-          "success": "#13a688",
-          "captcha_widget_theme": "dark"
+          "input_labels_placeholders": "#333333",
+
+          "links_focused_components": "#000000",
+          "success": "#3B8F2D",
+
+          "widget_border": "#D9D9D9",
+          "widget_background": "#FFFFFF"
         },
+
         "fonts": {
+          "font_url": "https://use.typekit.net/af/902418/00000000000000007735cc2a/30/l?primer=7fa3915bdafdf03041871920a205bef951d72bf64dd4c4460fb992e3ecc3a862&fvd=n4&v=3",
+          "links_style": "underlined",
           "reference_text_size": 16,
-          "links_style": "normal",
-          "title": {
-            "bold": false,
-            "size": 150
-          },
-          "subtitle": {
-            "bold": false,
-            "size": 87.5
-          },
+
           "body_text": {
             "bold": false,
-            "size": 87.5
+            "size": 100
           },
+
           "buttons_text": {
             "bold": false,
             "size": 100
           },
+
           "input_labels": {
             "bold": false,
             "size": 100
           },
+
           "links": {
+            "bold": false,
+            "size": 100
+          },
+
+          "title": {
             "bold": true,
-            "size": 87.5
+            "size": 150
+          },
+
+          "subtitle": {
+            "bold": false,
+            "size": 100
           }
         },
+
         "page_background": {
-          "page_layout": "center",
-          "background_color": "#bababa"
+          "background_color": "#000000",
+          "background_image_url": "https://prod.content.tvammo.com/media/leubzuhr/b2c-background.webp?width=3840",
+          "page_layout": "center"
         },
+
         "widget": {
-          "logo_position": "center",
-          "logo_url": "https://cdn.auth0.com/blog/auth0_by_okta_logo_black.png",
-          "logo_height": 52,
           "header_text_alignment": "center",
+          "logo_height": 52,
+          "logo_position": "center",
+          "logo_url": "https://prod.content.tvammo.com/media/st0ounwn/tva_logo_horizontal_300ppi.webp?w=640",
           "social_buttons_layout": "bottom"
         },
+
         "displayName": "Unnamed Theme"
       }
     }

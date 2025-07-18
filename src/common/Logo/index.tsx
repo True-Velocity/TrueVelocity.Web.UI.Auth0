@@ -37,7 +37,7 @@ const Logo: React.FC<LogoProps> = ({
         decoding="async"
         fetchPriority="high"
         className={cn(
-          "object-contain max-w-full max-h-full aspect-square",
+          "object-contain max-w-full max-h-full",
           imageClassName,
         )}
       />

@@ -13,7 +13,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Card = ({ children, className, ...rest }: CardProps) => {
-  const defaultStyles = "bg-background-widget rounded shadow-md px-10 py-10";
+  const defaultStyles = "bg-background-widget rounded shadow-xl px-10 py-10";
   return (
     <div className={cn(defaultStyles, className)} {...rest}>
       {children}

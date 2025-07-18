@@ -72,12 +72,7 @@ const FormField = forwardRef<HTMLInputElement, FormFieldProps>(
 
     return (
       <div className={className}>
-        <div
-          className={cn(
-            "relative mt-1 rounded-md shadow-sm",
-            inputWrapperClassName,
-          )}
-        >
+        <div className={cn("relative mt-1", inputWrapperClassName)}>
           <div className="relative w-full">
             <Input ref={ref} {...enhancedInputProps} />
             <Label
